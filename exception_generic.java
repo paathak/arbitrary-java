@@ -4,8 +4,13 @@ public class Main
 	public static void main(String[] args) {
 		Main.doThrowGeneric(new IOException()); //java will throw checked exception !!!!
 		//Main.doThrowGeneric(new RuntimeException());
+		
+		// In above two cases java compiler took side of Unchecked exceptions
+		
 		//Main.<Exception>doThrowGeneric(new RuntimeException()); compiler has clarity now 
 		//Main.<Exception>doThrowGeneric(new IOException()); compiler has clarity now
+		
+		//Main.<RuntimeException>doThrowGeneric(new IOException()); //compiler has clarity now & this will work too and won't fail while casting!!!!
 		
 	}
 	//the compiler is confused here as E can be any subclass of exception checked or unchecked
