@@ -2,7 +2,7 @@ import java.io.*;
 public class Main
 {
 	public static void main(String[] args) {
-		Main.doThrowGeneric(new IOException());
+		Main.doThrowGeneric(new IOException()); //java will throw checked exception !!!!
 		//Main.doThrowGeneric(new RuntimeException());
 		//Main.<Exception>doThrowGeneric(new RuntimeException()); compiler has clarity now 
 		//Main.<Exception>doThrowGeneric(new IOException()); compiler has clarity now
