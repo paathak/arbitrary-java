@@ -14,7 +14,7 @@ public class Main
 		
 	}
 	//the compiler is confused here as E can be any subclass of exception checked or unchecked
-	//if compiler mandatorily gives compile error then what in case if it was runtime Exception
+	//if compiler mandatorily gives compile error then what in case if it was runtime Exception , compiler just took side of unchecked here!!
 	public static <E extends Exception> void doThrowGeneric(Exception e) throws E {
 	    throw (E)e;
 	    
