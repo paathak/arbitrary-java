@@ -5,7 +5,7 @@ public class Main
 		Main.doThrowGeneric(new IOException()); //java will throw checked exception !!!!
 		//Main.doThrowGeneric(new RuntimeException());
 		
-		// In above two cases java compiler took side of Unchecked exceptions
+		// In above two cases java compiler took side of Unchecked exceptions, reason explained on line 17, 18 
 		
 		//Main.<Exception>doThrowGeneric(new RuntimeException()); compiler has clarity now 
 		//Main.<Exception>doThrowGeneric(new IOException()); compiler has clarity now
