@@ -57,7 +57,6 @@
             if (remM > 0) {
                 message = message + remM + "M ";
             }
-            
             if (j_count > 1 && m_count > 1) {
                 medal = "Bronze";
             }
@@ -67,7 +66,6 @@
             if (j_count >= 3 && m_count >= 3) {
                 medal = "Gold";
             }
-            
             let p = document.getElementById("note");
             if (message != "") {
                 message = message + " for win ";
@@ -102,14 +100,21 @@
                         timerB.innerText = "Took " + timeElapsed + " min. Start again?";
                         status = "stop";
                         timeElapsed = 0;
-                        timerP.disabled = true;
+                        timerP.disabled = false;
+                        timerP.innerText = "Reset";
                     }
                 } else if (status == "stop") {
-                    begin = date;
-                    status = "start";
-                    timerP.disabled = false;
-                    timerB.innerText = "Stop";
                     
+                    if (v == 'P') {
+                        timerB.innerText = "Start";
+                        timerP.innerText = "Pause";
+                    } else {
+                        begin = date;
+                        status = "start";
+                        timerP.disabled = false;
+                        timerP.innerText = "Pause";
+                        timerB.innerText = "Stop";
+                    }
                 } else if (status == "pause") {
                     status = "start";
                     begin = date;
