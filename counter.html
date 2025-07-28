@@ -1,0 +1,160 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <script>
+        window.onload = init;
+        let timerB;
+        let timerP;
+        function init() {
+            let button = document.getElementById("button");
+            let j = document.getElementById("J");
+            let m = document.getElementById("M");
+            timerB = document.getElementById("timerB");
+            timerP = document.getElementById("timerP");
+            timerP.disabled = true;
+            console.log(localStorage.getItem("Expiry"));
+            if (new Date() < new Date(localStorage.getItem("Expiry"))) {
+                console.log("Values found...")
+                j.value = localStorage.getItem("J");
+                m.value = localStorage.getItem("M");
+            }
+            j.onclick = sum;
+            m.onclick = sum;
+            button.onclick = sum;
+            sum();
+        }
+        function sum() {
+            const date = new Date();
+            date.setDate(date.getDate());
+            // date.setHours(0);
+            date.setMinutes(date.getMinutes() + 2);
+            date.setSeconds(0);
+            let j = document.getElementById("J");
+            let j_count = +j.value;
+            let m = document.getElementById("M");
+            let m_count = +m.value;
+            let s = j_count + m_count;
+            let t = document.getElementById("T");
+            t.value = s;
+            localStorage.setItem("J", j.value);
+            localStorage.setItem("M", m.value);
+            localStorage.setItem("Expiry", date);
+            let remT = 6 - s;
+            let remJ = 3 - j_count;
+            let remM = 3 - m_count;
+            let message = "";
+            let medal = "NA";
+            if (j_count - m_count > 1) {
+                j.disabled = true;
+            } else {
+                j.disabled = false;
+            }
+            if (remJ > 0) {
+                message = message + remJ + "J ";
+            }
+            if (remM > 0) {
+                message = message + remM + "M ";
+            }
+            
+            if (j_count > 1 && m_count > 1) {
+                medal = "Bronze";
+            }
+            if (j_count >= 2 && m_count >= 2) {
+                medal = "Silver";
+            }
+            if (j_count >= 3 && m_count >= 3) {
+                medal = "Gold";
+            }
+            
+            let p = document.getElementById("note");
+            if (message != "") {
+                message = message + " for win ";
+            }
+            p.innerText = "";
+            if (medal != "NA") {
+                p.innerText = "Medal: " + medal; // + "\n" + message;
+            }
+        }
+        let begin;
+        let timeElapsed = 0;
+        let status = "stop";
+        console.log(timerB);
+        function timer(v) {
+            let date = new Date();
+            if (begin == null) {
+                begin = date;
+                status = "start";
+                timerP.disabled = false;
+                timerB.innerText = "Stop";
+            } else {
+                if (status == "start") {
+                    let interval = date - begin;
+                    interval = Math.floor(interval / (1000 * 60));
+                    timeElapsed = timeElapsed + interval;
+                    if (v == 'P') {
+                        timerB.innerText = "Took " + timeElapsed + " min. Paused!";
+                        timerB.disabled = true;
+                        timerP.innerText = "Resume";
+                        status = "pause";
+                    } else {
+                        timerB.innerText = "Took " + timeElapsed + " min. Start again?";
+                        status = "stop";
+                        timeElapsed = 0;
+                        timerP.disabled = true;
+                    }
+                } else if (status == "stop") {
+                    begin = date;
+                    status = "start";
+                    timerP.disabled = false;
+                    timerB.innerText = "Stop";
+                    
+                } else if (status == "pause") {
+                    status = "start";
+                    begin = date;
+                    timerB.innerText = "Stop";
+                    timerB.disabled = false;
+                    timerP.innerText = "Pause";
+                }
+            }
+        }
+    </script>
+    <style>
+        #J {
+            margin: 0% 1% 0% 0.5%;
+            text-align: center;
+            width: 5%;
+        }
+        #M {
+            margin: 0% 2% 0% 0.5%;
+            text-align: center;
+            width: 5%;
+        }
+        #T {
+            margin: 0% 2% 0% 0.5%;
+            text-align: center;
+            width: 5%;
+        }
+        #button {
+            background-color: white;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <label for="J">J</label>
+    <input type="number" name="J" id="J" max="8" min="0" step="0.5">
+    +&nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="M">M</label>
+    <input type="number" name="M" id="M" max="8" min="0" step="0.5">
+    <button type="button" class="btn btn-equal" id="button">=</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="T">T</label>
+    <input type="number" id="T" min="0" readonly>
+    <button id="timerB" onclick="timer('S')">Start</button>
+    <button id="timerP" onclick="timer('P')">Pause</button>
+    <br>
+    <p id="note"></p>
+</body>
+</html>
