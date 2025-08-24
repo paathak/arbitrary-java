@@ -1,5 +1,5 @@
 systemctl poweroff
 systemctl suspend
 
-pactl load-module module-combined-sink
+pactl load-module module-combine-sink
 
