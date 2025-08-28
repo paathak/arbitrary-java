@@ -36,7 +36,7 @@
     </row>
     <row>
 	  <button icon="refresh" onTap="refresh" color="#de7e5d" />
-	  <button icon="arrowdown" onTap="pg_down" />
+	  <button text="NewTab" onTap="new_tab" />
 	  <button icon="down" onTap="scroll_down" />
 	  <button text="YouTube" onTap="launch_yt" color="#FF0000" />
     </row>
