@@ -30,7 +30,7 @@
     </row>
     <row>
       <button text="JioHotstar" onTap="launch_hotstar" color="#191970" />
-	  <button icon="arrowup" onTap="pg_up" />
+	  <button text="Home" onTap="launch_home" />
 	  <button icon="up" onTap="scroll_up" />
 	  <button text="SonyLiv" onTap="launch_jc" color="#DE3163" />
     </row>
