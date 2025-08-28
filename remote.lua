@@ -119,7 +119,7 @@ end
 
 --@help Launch Home site
 actions.launch_home = function ()
-	os.open("http://");
+   keyboard.stroke("alt", "Home");
 end
 
 --@help Lower volume
